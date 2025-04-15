@@ -1,11 +1,11 @@
 {
-  "name": "clase-6-typescript",
+  "name": "Clase-6-Typescript",
   "version": "1.0.0",
   "description": "Action History Homework",
   "main": "action-history.js",
   "scripts": {
     "build": "tsc",
-    "dev": "node action-history.js",
+    "dev": "node action-history.js", 
     "start": "node action-history.js"
   },
   "keywords": [],

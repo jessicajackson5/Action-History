@@ -1,8 +1,8 @@
 // Create and Manage a History with Arrays and Objects in Typescript
 
-const randomIDStr = () => Math.random().toString(36).slice(2)
+const randomIDStr1 = () => Math.random().toString(36).slice(2)
 
-class Accion {
+class Accion1 {
     id: string
     descripcion: string
     fecha: string
@@ -11,23 +11,23 @@ class Accion {
         descripcion: string,
         fecha: string, 
     ) {
-        this.id = randomIDStr()
+        this.id = randomIDStr1()
         this.descripcion = descripcion
         this.fecha = fecha
     }
 }
 
 class Historial {
-    historial: Accion[]
+    historial: Accion1[]
 
     constructor(
-        historial: Accion[] = []
+        historial: Accion1[] = []
     ) {
         this.historial = historial
     }
     // Agregar una nueva acción al historial
     agregar(descripcion: string): void {
-        const nueva_accion: Accion = new Accion(
+        const nueva_accion: Accion1 = new Accion1(
             descripcion,
             new Date().toISOString()
     )
@@ -68,9 +68,10 @@ historial.agregar("User updated profile");
 historial.agregar("User logged out");
 historial.mostrar()
 
+/* Outdate test. Need to get the random string ID to eliminate it
 console.log("\nEliminar accion con ID 1:");
 historial.eliminar_accion(1)
-historial.mostrar()
+historial.mostrar()*/
 
 console.log("\nEliminar todo el historial:");
 historial.eliminar_todo()

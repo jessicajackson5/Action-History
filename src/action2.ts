@@ -1,9 +1,9 @@
 const randomIDStr = () => Math.random().toString(36).slice(2)
 
 class Accion {
-    id: number | string
+    id: string
     descripcion: string
-    fecha: Date
+    protected fecha: Date
 
     constructor(
         descripcion: string,
@@ -18,14 +18,11 @@ class Accion {
         if(this.descripcion.trim() !== ""){
             console.log(`id: ${this.id}, descripcion: ${this.descripcion}, fecha: ${this.fecha}`)
         }
-        else {
-            return
-        }
     }
 }
 
 class AccionInicioSesion extends Accion {
-    dispositivo_origen: string // Device session initiated on
+    private dispositivo_origen: string // Device session initiated on
 
     constructor(
         descripcion: string,
@@ -46,9 +43,9 @@ class AccionInicioSesion extends Accion {
 }
 
 class AccionCierreSesion extends Accion {
-    dispositivo_origen: string  // Device session closed on 
-    tiempo_de_sesion: number
-    inicio: AccionInicioSesion
+    private dispositivo_origen: string  // Device session closed on 
+    tiempo_de_sesion: number // Session duration in minutes
+    inicio:  AccionInicioSesion
 
     constructor(
         descripcion: string,
@@ -58,7 +55,8 @@ class AccionCierreSesion extends Accion {
     ) {
         super(descripcion, fecha)
         this.dispositivo_origen = dispositivo_origen
-        this.tiempo_de_sesion = fecha.getTime() - inicio.fecha.getTime()
+        this.inicio = inicio
+        this.tiempo_de_sesion = Math.round(fecha.getTime() - inicio['fecha'].getTime())/(60*1000)
     }
     mostrarDetalle(): void{
         if(this.descripcion.trim() !== ""){
@@ -69,3 +67,10 @@ class AccionCierreSesion extends Accion {
         }
     }
 }
+
+/* Test code */
+const inicio = new AccionInicioSesion("Session started", new Date("2025-04-12T09:00:00"), "Laptop")
+inicio.mostrarDetalle()
+
+const cierre = new AccionCierreSesion("Session ended", new Date("2025-04-12T11:15:00"), "Laptop", inicio)
+cierre.mostrarDetalle()
